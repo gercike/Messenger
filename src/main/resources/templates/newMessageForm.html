@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Message</title>
+</head>
+<body>
+<form method="POST" th:action="@{/newMessage}" th:object="${newMssg}">
+    <table>
+        <tr>
+            <td>your message:</td>
+        </tr>
+        <tr>
+            <td>
+                <textarea th:field="*{messageText}" rows="4" cols="50"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>your name:</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" th:field="*{messageAuthor}"/>
+            </td>
+        </tr>
+        <!--    <p th:if=${#fields.hasErrors('messageText')} th:errors="*{messageText}">Az üzenet szövege nem lehet üres</p>-->
+        <tr>
+            <td>
+                <input type="submit" value="Submit"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

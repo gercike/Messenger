@@ -1,0 +1,8 @@
+org\progmatic\messenger\controllers\MessageController.class
+org\progmatic\messenger\model\SearchExpression.class
+org\progmatic\messenger\filters\HttpRequestFilter.class
+org\progmatic\messenger\controllers\HomeController.class
+org\progmatic\messenger\model\Constants.class
+org\progmatic\messenger\MessengerApplication.class
+org\progmatic\messenger\model\Message.class
+org\progmatic\messenger\services\MessageList.class

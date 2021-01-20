@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome!</h2>
+    <h3>What is your name?</h3>
+    <form action="">
+        <input type="text" name="name">
+        <input type="submit" value="Click me!">
+    </form>
+    <div data-th-text="'Hello, '+ ${name} + '!'"></div>
+    <br>
+    <a href="http://localhost:8080/dobokocka">Throw some dice!</a>
+    <br>
+    <br>
+    <a th:href="@{/messages}">Page of messages</a>
+</div>
+</body>
+</html>
