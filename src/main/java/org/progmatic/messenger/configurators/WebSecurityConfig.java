@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("gercike").password("gercike").roles("ADMIN").build());
+//        manager.createUser(User.withUsername("gercike").password("gercike").roles("ADMIN").build());
         manager.createUser(User.withUsername("someone").password("someone").roles("USER").build());
         return manager;
     }
@@ -37,10 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http.addFilterBefore(filter, CsrfFilter.class)
                 .authorizeRequests()
-                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages").permitAll()
+                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages", "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
-//                .loginPage("/loginPage").permitAll();
+                .formLogin()
+                .loginPage("/loginPage").permitAll()
+                .loginProcessingUrl("/loginPage");
     }
 }
