@@ -1,5 +1,6 @@
 package org.progmatic.messenger.controllers;
 
+import org.progmatic.messenger.model.GercikeUser;
 import org.progmatic.messenger.model.Message;
 import org.progmatic.messenger.model.SearchExpression;
 import org.progmatic.messenger.services.MessageList;
@@ -34,6 +35,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Scope("singleton")
 public class MessageController {
 
+
     public MessageController() {
         new MessageList();
     }
@@ -41,25 +43,30 @@ public class MessageController {
     @RequestMapping(value = {"/messages"}, method = GET)
     public String showAllMessages(@ModelAttribute("searchExpr") SearchExpression se, Model model) {
         model.addAttribute("messages", MessageList.getMessageList());
+        GercikeUser ud = (GercikeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("name", ud.getUsername());
         return "showMessages";
     }
 
     @RequestMapping(value = "/messages/{messageId}", method = GET)
     public String showMessage(@PathVariable("messageId") int id, Model model, @ModelAttribute("searchExpr") SearchExpression se) {
         model.addAttribute("messages", MessageList.getMessageList().stream().filter(message -> message.getMessageId() == id).collect(Collectors.toList()));
+        GercikeUser ud = (GercikeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("name", ud.getUsername());
         return "showMessages";
     }
 
     @RequestMapping(value = "/createNewMessage", method = GET)
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public String newMessageTypeIn(@ModelAttribute("newMssg") Message message) {
-        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    public String newMessageTypeIn(@ModelAttribute("newMssg") Message message, Model model) {
+        GercikeUser ud = (GercikeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         message.setMessageAuthor(ud.getUsername());
+        model.addAttribute("name", ud.getUsername());
         return "newMessageForm";
     }
 
     @RequestMapping(value = "/newMessage", method = POST)
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public String createNewMessage(@ModelAttribute("newMssg") Message message) {
 //        if (br.hasErrors()){
 //            return "newMessageForm";

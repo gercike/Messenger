@@ -1,18 +1,29 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav navbar-nav offset-2">
+        <li><a class="nav-link" th:href="@{/}">Home</a></li>
+        <li><a class="nav-link" th:href="@{/createNewMessage}">New message</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>Signed in as:<li th:text="'&nbsp;' + ${name}"></li></li>
+    </ul>
+</nav>
 <div class="container">
     <h2>Welcome!</h2>
-    <h3>What is your name?</h3>
-    <form action="">
-        <input type="text" name="name">
-        <input type="submit" value="Click me!">
-    </form>
-    <div data-th-text="'Hello, '+ ${name} + '!'"></div>
+    <h3 th:text="'Hello, '+ ${name} + '!'"></h3>
+    <h4 th:sec:authentication="name"></h4>
     <br>
     <a href="http://localhost:8080/dobokocka">Throw some dice!</a>
+    <br>
+    <br>
+    <a th:href="@{/loginPage}">Login</a>
     <br>
     <br>
     <a th:href="@{/messages}">Page of messages</a>

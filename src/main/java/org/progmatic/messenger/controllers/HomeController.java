@@ -1,23 +1,31 @@
 package org.progmatic.messenger.controllers;
 
-import org.progmatic.messenger.model.Message;
+import org.progmatic.messenger.model.GercikeUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class HomeController {
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    public HomeController(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @RequestMapping(value = {"/", "/home"}, method = GET)
     public String home(@RequestParam(name = "name", required = false, defaultValue = "valaki") String name, Model model) {
-        model.addAttribute("name", name);
+        GercikeUser ud = (GercikeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("name", ud.getUsername());
         return "greeting";
     }
 
@@ -27,6 +35,8 @@ public class HomeController {
         int number = r.nextInt(sides) + 1;
         model.addAttribute("number", number);
         model.addAttribute("sides", sides);
+        GercikeUser ud = (GercikeUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("name", ud.getUsername());
         return "diceRoll";
     }
 }

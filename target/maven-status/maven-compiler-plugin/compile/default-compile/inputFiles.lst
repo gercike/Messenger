@@ -1,5 +1,9 @@
+C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\configurators\WebSecurityConfig.java
 C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\filters\HttpRequestFilter.java
+C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\model\GercikeUser.java
+C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\model\GercikeUserDetailsManager.java
 C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\model\Constants.java
+C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\controllers\LoginAndRegistrationController.java
 C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\controllers\MessageController.java
 C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\model\SearchExpression.java
 C:\Users\Gercike\IdeaProjects\Messenger\src\main\java\org\progmatic\messenger\MessengerApplication.java

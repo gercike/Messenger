@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>diceRoll</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav navbar-nav offset-2">
+        <li><a class="nav-link" th:href="@{/}">Home</a></li>
+        <li><a class="nav-link" th:href="@{/createNewMessage}">New message</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>Signed in as:<li th:text="'&nbsp;' + ${name}"></li></li>
+    </ul>
+</nav>
 <div class="container" style="text-align: center">
     <form action="">
         <input type="number" name="sides" placeholder="number of dice's sides">

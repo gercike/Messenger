@@ -1,6 +1,7 @@
 package org.progmatic.messenger.configurators;
 
 
+import org.progmatic.messenger.model.GercikeUserDetailsManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,11 +19,17 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
+    /*@Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 //        manager.createUser(User.withUsername("gercike").password("gercike").roles("ADMIN").build());
-        manager.createUser(User.withUsername("someone").password("someone").roles("USER").build());
+//        manager.createUser(User.withUsername("someone").password("someone").roles("USER").build());
+        return manager;
+    }*/
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        GercikeUserDetailsManager manager = new GercikeUserDetailsManager();
         return manager;
     }
 
@@ -34,14 +41,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        http.addFilterBefore(filter, CsrfFilter.class)
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        http
                 .authorizeRequests()
-                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages", "/**").permitAll()
+                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages", "/registrationPage", "/css/**").permitAll()
+                .antMatchers("/createNewMessage", "/newMessage").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/loginPage").permitAll()
-                .loginProcessingUrl("/loginPage");
+                .loginProcessingUrl("/loginPage")
+                .and()
+                .logout().permitAll();
     }
 }
