@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New topic</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav navbar-nav offset-2">
+        <li><a class="nav-link" th:href="@{/}">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>Signed in as:<li th:text="'&nbsp;' + ${name}"></li></li>
+    </ul>
+</nav>
+<form method="POST" th:action="@{/createTopic}" th:object="${newTopicObject}">
+    <table>
+        <tr>
+            <td>the new topic:</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" th:field="*{topicName}"/>
+            </td>
+        </tr>
+        <!--    <p th:if=${#fields.hasErrors('messageText')} th:errors="*{messageText}">Az üzenet szövege nem lehet üres</p>-->
+        <tr>
+            <td>
+                <input type="submit" value="Submit"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

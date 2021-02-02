@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: org.progmatic.messenger.MessengerApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.54 s - in org.progmatic.messenger.MessengerApplicationTests
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 9.731 s <<< FAILURE! - in org.progmatic.messenger.MessengerApplicationTests
+messagesShouldShowAllMessages  Time elapsed: 0.112 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is java.lang.ClassCastException: class java.lang.String cannot be cast to class org.progmatic.messenger.model.GercikeUser (java.lang.String is in module java.base of loader 'bootstrap'; org.progmatic.messenger.model.GercikeUser is in unnamed module of loader 'app')
+	at org.progmatic.messenger.MessengerApplicationTests.messagesShouldShowAllMessages(MessengerApplicationTests.java:23)
+Caused by: java.lang.ClassCastException: class java.lang.String cannot be cast to class org.progmatic.messenger.model.GercikeUser (java.lang.String is in module java.base of loader 'bootstrap'; org.progmatic.messenger.model.GercikeUser is in unnamed module of loader 'app')
+	at org.progmatic.messenger.MessengerApplicationTests.messagesShouldShowAllMessages(MessengerApplicationTests.java:23)
+
+newMessagePostMethodShouldRedirectToMessages  Time elapsed: 0.11 s  <<< FAILURE!
+java.lang.AssertionError: No ModelAndView found
+	at org.progmatic.messenger.MessengerApplicationTests.newMessagePostMethodShouldRedirectToMessages(MessengerApplicationTests.java:34)
+

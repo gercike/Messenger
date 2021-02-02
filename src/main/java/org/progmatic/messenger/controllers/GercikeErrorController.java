@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class GercikeErrorController {
 
-    @GetMapping(value = "errors")
-    public String handleErrors(HttpServletRequest request) {
-        int statusCode = response.getStatus();
-        String redirectUrl = "https://http.cat/" + statusCode;
-        return "redirect:" + redirectUrl;
-    }
+//    @GetMapping(value = "errors")
+//    public String handleErrors(HttpServletRequest request) {
+//        int as =
+//        int statusCode = re.getStatus();
+//        String redirectUrl = "https://http.cat/" + statusCode;
+//        return "redirect:" + redirectUrl;
+//    }
 }

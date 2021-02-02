@@ -10,27 +10,34 @@
     <ul class="nav navbar-nav offset-2">
         <li><a class="nav-link" th:href="@{/}">Home</a></li>
         <li><a class="nav-link" th:href="@{/createNewMessage}">New message</a></li>
+        <li><a class="nav-link" th:href="@{/createTopic}">New topic</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li>Signed in as:<li th:text="'&nbsp;' + ${name}"></li></li>
+        <li>Signed in as:
+        <li th:text="'&nbsp;' + ${name}"></li>
+        </li>
     </ul>
 </nav>
 <form method="POST" th:action="@{/newMessage}" th:object="${newMssg}">
     <table>
+        <tr>
+            <td>topic of your message:</td>
+        </tr>
+        <tr>
+            <td>
+                <select th:field="*{topic.topicName}">
+                    <option th:each="topic : ${topicList}"
+                            th:value="${topic.topicName}"
+                            th:text="${topic.topicName}"></option>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td>your message:</td>
         </tr>
         <tr>
             <td>
                 <textarea th:field="*{messageText}" rows="4" cols="50"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>your name:</td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" th:field="*{messageAuthor}"/>
             </td>
         </tr>
         <!--    <p th:if=${#fields.hasErrors('messageText')} th:errors="*{messageText}">Az üzenet szövege nem lehet üres</p>-->

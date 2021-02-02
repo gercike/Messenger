@@ -1,58 +1,96 @@
 package org.progmatic.messenger.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.apache.catalina.LifecycleState;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+@Entity
 public class Message {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int messageId;
+
     private String messageText;
-    private String messageAuthor;
-    private String timeOfCreation;
 
-    public Message(String text, String author) {
+    @ManyToOne
+    private Message commentTo;
+
+    @OneToMany(mappedBy = "commentTo")
+    private List<Message> reactions;
+
+    private LocalDateTime timeOfCreation;
+
+    @ManyToOne
+    private Topic topic;
+
+    @ManyToOne
+    private GercikeUser messageAuthor;
+
+    public Message() {
+        this.timeOfCreation = LocalDateTime.now();
+    }
+
+    public Message(String text) {
         this.messageText = text;
-        this.messageAuthor = author;
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATETIMEPATTERN);
-        this.timeOfCreation = now.format(formatter);
+        this.timeOfCreation = LocalDateTime.now();
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
+    public Message getCommentTo() {
+        return commentTo;
     }
 
-    public void setMessageAuthor(String messageAuthor) {
-        this.messageAuthor = messageAuthor;
+    public void setCommentTo(Message commentTo) {
+        this.commentTo = commentTo;
     }
 
-    public void setTimeOfCreation(String timeOfCreation) {
-        this.timeOfCreation = timeOfCreation;
+    public List<Message> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Message> reactions) {
+        this.reactions = reactions;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public String getMessageText() {
         return messageText;
     }
 
-    public String getMessageAuthor() {
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public GercikeUser getMessageAuthor() {
         return messageAuthor;
     }
 
-    public String getTimeOfCreation() {
+    public void setMessageAuthor(GercikeUser messageAuthor) {
+        this.messageAuthor = messageAuthor;
+    }
+
+    public LocalDateTime getTimeOfCreation() {
         return timeOfCreation;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setTimeOfCreation(LocalDateTime localDateTime) {
+        this.timeOfCreation = localDateTime;
     }
 
     public int getMessageId() {
         return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 }

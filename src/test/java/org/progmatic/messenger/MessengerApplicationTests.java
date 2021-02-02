@@ -1,6 +1,7 @@
 package org.progmatic.messenger;
 
 import org.junit.jupiter.api.Test;
+import org.progmatic.messenger.model.GercikeUser;
 import org.progmatic.messenger.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +28,7 @@ class MessengerApplicationTests {
 
     @Test
     void newMessagePostMethodShouldRedirectToMessages() throws Exception {
-        Message testMessage = new Message("hahó", "Béla");
+        Message testMessage = new Message("Ez egy teszt üzenet");
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/newMessage").with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.model().attribute("newMssg", testMessage))

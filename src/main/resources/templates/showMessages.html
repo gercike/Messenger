@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Üzenetek</title>
+    <title>Messages</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -10,9 +10,12 @@
     <ul class="nav navbar-nav offset-2">
         <li><a class="nav-link" th:href="@{/}">Home</a></li>
         <li><a class="nav-link" th:href="@{/createNewMessage}">New message</a></li>
+        <li><a class="nav-link" th:href="@{/createTopic}">New topic</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li>Signed in as:<li th:text="'&nbsp;' + ${name}"></li></li>
+        <li>Signed in as:
+        <li th:text="'&nbsp;' + ${name}"></li>
+        </li>
     </ul>
 </nav>
 <div class="searchInTheMessages">
@@ -29,19 +32,34 @@
                 <td><input type="text" th:field="*{messageText}" placeholder="text of message"></td>
             </tr>
             <tr>
-                <td>Order by:
-                    <select th:field="*{sortBy}" th:default="sortById">
-                        <option th:value="sortById">messageId</option>
-                        <option th:value="sortByAuthor">author</option>
-                        <option th:value="sortByTimeOfCreation">datetime of message</option>
+                <td>Search by topic:</td>
+                <td>
+                    <!--<input type="text" th:field="*{messageTopic}" placeholder="topic of message"></td>-->
+                    <select th:field="*{messageTopic}">
+                        <option value=""></option>
+                        <option th:each="topic : ${topicList}"
+                                th:value="${topic.topicName}"
+                                th:selected="${null}"
+                                th:text="${topic.topicName}"></option>
+                    </select>
+            </tr>
+            <tr>
+                <td>Order by:</td>
+                <td>
+                    <select th:field="*{selectedSortBy}">
+                        <option th:each="sortByListMember : ${sortByList}"
+                                th:value="${sortByListMember}"
+                                th:text="${sortByListMember}"></option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>Order:
-                    <select th:field="*{sortOrder}" th:default="ascending">
-                        <option th:value="ascending">ascending</option>
-                        <option th:value="descending">descending</option>
+                <td>Order:</td>
+                <td>
+                    <select th:field="*{selectedSortOrder}">
+                        <option th:each="sortOrderListMember : ${sortOrderList}"
+                                th:value="${sortOrderListMember}"
+                                th:text="${sortOrderListMember}"></option>
                     </select>
                 </td>
             </tr>
@@ -59,19 +77,42 @@
             <td>message id</td>
             <td>author of message</td>
             <td>text of message</td>
+            <td>topic of message</td>
             <td>datetime of message</td>
         </tr>
         </thead>
         <tr data-th-each="message: ${messages}">
             <td data-th-text="${message.messageId}"></td>
-            <td data-th-text="${message.messageAuthor}"></td>
+            <td data-th-text="${message.messageAuthor.userName}"></td>
             <td data-th-text="${message.messageText}"></td>
+            <td data-th-text="${message.topic.topicName}"></td>
             <td data-th-text="${message.timeOfCreation}"></td>
             <td>
                 <a th:href="@{'/messages/' + ${message.messageId}}">link</a>
+                <a th:href="@{'/reactionTo/' + ${message.messageId}}">react</a>
             </td>
         </tr>
     </table>
 </div>
+<!--<div th:if="${not #lists.isEmpty(showap)}">-->
+<!--    <form method="POST" th:action="@{/newMessage}" th:object="${newMssg}">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td>your message:</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    <textarea th:field="*{messageText}" rows="4" cols="50"></textarea>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            &lt;!&ndash;    <p th:if=${#fields.hasErrors('messageText')} th:errors="*{messageText}">Az üzenet szövege nem lehet üres</p>&ndash;&gt;-->
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    <input type="submit" value="Submit"/>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </form>-->
+<!--</div>-->
 </body>
 </html>

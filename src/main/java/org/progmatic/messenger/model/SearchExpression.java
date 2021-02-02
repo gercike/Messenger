@@ -2,31 +2,70 @@ package org.progmatic.messenger.model;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchExpression {
     private String messageText;
 
     @NotBlank (message = "ide kell valami")
     private String messageAuthor;
+    private String messageTopic;
     private int messageId;
     private LocalDateTime messageCreation;
-    private String sortBy;
-    private String sortOrder;
+    private String selectedSortOrder;
+    private String selectedSortBy;
+    private List<String> sortByList;
+    private List<String> sortOrderList;
 
-    public String getSortOrder() {
-        return sortOrder;
+    public SearchExpression() {
+        sortByList = new ArrayList<>();
+        sortByList.add("messageId");
+        sortByList.add("author");
+        sortByList.add("datetime of message");
+        sortOrderList = new ArrayList<>();
+        sortOrderList.add("ascending");
+        sortOrderList.add("descending");
     }
 
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder;
+    public String getSelectedSortBy() {
+        return selectedSortBy;
     }
 
-    public String getSortBy() {
-        return sortBy;
+    public void setSelectedSortBy(String selectedSortBy) {
+        this.selectedSortBy = selectedSortBy;
     }
 
-    public void setSortBy(String sortBy) {
-        this.sortBy = sortBy;
+    public String getSelectedSortOrder() {
+        return selectedSortOrder;
+    }
+
+    public void setSelectedSortOrder(String selectedSortOrder) {
+        this.selectedSortOrder = selectedSortOrder;
+    }
+
+    public String getMessageTopic() {
+        return messageTopic;
+    }
+
+    public void setMessageTopic(String messageTopic) {
+        this.messageTopic = messageTopic;
+    }
+
+    public void setSortByList(List<String> sortByList) {
+        this.sortByList = sortByList;
+    }
+
+    public void setSortOrderList(List<String> sortOrderList) {
+        this.sortOrderList = sortOrderList;
+    }
+
+    public List<String> getSortByList() {
+        return sortByList;
+    }
+
+    public List<String> getSortOrderList() {
+        return sortOrderList;
     }
 
     public int getMessageId() {
