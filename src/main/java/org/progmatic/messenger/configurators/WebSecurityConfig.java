@@ -20,10 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
         http
                 .authorizeRequests()
-                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages", "/registrationPage", "/css/**").permitAll()
+                .antMatchers("/messages", "/messages/{messageId}", "/searchInMessages", "/registrationPage", "/css/**", "/rest/csrf").permitAll()
                 .antMatchers("/createNewMessage", "/newMessage").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and()

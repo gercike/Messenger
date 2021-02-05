@@ -30,7 +30,6 @@ public class MessageList {
     @Transactional
     public List<Message> getMessageListFromDB() {
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(em);
-        BooleanBuilder booleanBuilder = new BooleanBuilder();
         List<Message> messageListFromDB2 = jpaQueryFactory.selectFrom(QMessage.message).fetch();
         return messageListFromDB2;
     }

@@ -1,6 +1,6 @@
 package org.progmatic.messenger.model;
 
-import org.apache.catalina.LifecycleState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,14 +19,17 @@ public class Message {
     private Message commentTo;
 
     @OneToMany(mappedBy = "commentTo")
+    @JsonIgnore
     private List<Message> reactions;
 
     private LocalDateTime timeOfCreation;
 
     @ManyToOne
+    @JsonIgnore
     private Topic topic;
 
     @ManyToOne
+    @JsonIgnore
     private GercikeUser messageAuthor;
 
     public Message() {

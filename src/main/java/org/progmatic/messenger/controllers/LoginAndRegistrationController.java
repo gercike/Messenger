@@ -38,16 +38,16 @@ public class LoginAndRegistrationController {
         return "loginPage";
     }
 
-    @RequestMapping(value = {"/loginPage"}, method = POST)
-    public String logIn(@RequestParam("username") String un,
-                        @RequestParam("password") String pw) {
-        System.out.println("ez a login post method");
-        UserDetails ud = gusdm.loadUserByUsername(un);
-        if (ud.getPassword().equals(pw)) {
-            return "/";
-        }
-        return "loginPage";
-    }
+//    @RequestMapping(value = {"/loginPage"}, method = POST)
+//    public String logIn(@RequestParam("username") String un,
+//                        @RequestParam("password") String pw) {
+//        System.out.println("ez a login post method");
+//        UserDetails ud = gusdm.loadUserByUsername(un);
+//        if (ud.getPassword().equals(pw)) {
+//            return "/";
+//        }
+//        return "loginPage";
+//    }
 
     @RequestMapping(value = {"/registrationPage"}, method = GET)
     public String showRegistrationPage(@ModelAttribute("newGercikeUser") GercikeUser gercikeUser) {

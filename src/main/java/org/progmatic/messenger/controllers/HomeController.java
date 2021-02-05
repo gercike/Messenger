@@ -1,6 +1,7 @@
 package org.progmatic.messenger.controllers;
 
 import org.progmatic.messenger.model.GercikeUser;
+import org.progmatic.messenger.model.GercikeUserDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,8 +19,8 @@ public class HomeController {
     UserDetailsService userDetailsService;
 
     @Autowired
-    public HomeController(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public HomeController(GercikeUserDetailsManager gercikeUserDetailsManager) {
+        this.userDetailsService = gercikeUserDetailsManager;
     }
 
     @RequestMapping(value = {"/", "/home"}, method = GET)

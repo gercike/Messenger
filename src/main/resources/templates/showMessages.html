@@ -89,6 +89,9 @@
             <td data-th-text="${message.timeOfCreation}"></td>
             <td>
                 <a th:href="@{'/messages/' + ${message.messageId}}">link</a>
+                <form method="POST" th:action="@{/searchInMessages}" th:object="${searchExpr}">
+                    <a href="javascript:;" th:onclick="@{'/messages/' + ${message.messageId}}">edit</a>
+                </form>
                 <a th:href="@{'/reactionTo/' + ${message.messageId}}">react</a>
             </td>
         </tr>

@@ -59,7 +59,7 @@ public class GercikeUserDetailsManager implements UserDetailsManager {
     @Transactional
     public boolean userExists(String username) {
         try {
-            GercikeUser gercikeUser = (GercikeUser) em.createQuery("SELECT user from GercikeUser user where user.userName = :nameToCheck")
+            em.createQuery("SELECT user from GercikeUser user where user.userName = :nameToCheck")
                     .setParameter("nameToCheck", username)
                     .getSingleResult();
         } catch (NoResultException e) {
